@@ -31,7 +31,7 @@ class Discount implements PresenceInterface
     /**
      * @var User|null
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
     private ?User $user;
     /**
@@ -45,10 +45,10 @@ class Discount implements PresenceInterface
      */
     private bool $used = false;
     /**
-     * @var DateTime
-     * @ORM\Column(type="datetime")
+     * @var ?DateTime
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private DateTime $expiresAt;
+    private ?DateTime $expiresAt = null;
 
     /**
      * @return int

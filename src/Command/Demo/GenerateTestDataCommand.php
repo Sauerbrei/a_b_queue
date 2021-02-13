@@ -29,27 +29,20 @@ class GenerateTestDataCommand extends Command
      * @var DiscountManager
      */
     private DiscountManager $discountManager;
-    /**
-     * @var DiscountFactory
-     */
-    private DiscountFactory $discountFactory;
 
     /**
      * GenerateTestDataCommand constructor.
      *
      * @param UserManager     $userManager
      * @param DiscountManager $discountManager
-     * @param DiscountFactory $discountFactory
      */
     public function __construct(
         UserManager $userManager,
-        DiscountManager $discountManager,
-        DiscountFactory $discountFactory
+        DiscountManager $discountManager
     ) {
         parent::__construct(self::$defaultName);
         $this->userManager = $userManager;
         $this->discountManager = $discountManager;
-        $this->discountFactory = $discountFactory;
     }
 
     protected function configure()
@@ -72,7 +65,7 @@ class GenerateTestDataCommand extends Command
             $this->userManager->save($user);
         }
         for ($i = 0; $i < $amountDiscounts; $i++) {
-            $discount = $this->discountFactory->createDiscount()->setCode(md5((string)$i));
+            $discount = DiscountFactory::createDiscount()->setCode(md5((string)$i));
             $this->discountManager->save($discount);
         }
 

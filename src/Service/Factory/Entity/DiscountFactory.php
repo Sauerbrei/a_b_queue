@@ -14,24 +14,11 @@ use Carbon\Carbon;
  */
 class DiscountFactory
 {
-    private int $defaultExpiry;
-
-    /**
-     * DiscountFactory constructor.
-     *
-     * @param int $defaultExpiry
-     */
-    public function __construct(int $defaultExpiry)
-    {
-        $this->defaultExpiry = $defaultExpiry;
-    }
-
     /**
      * @return Discount
      */
-    public function createDiscount(): Discount
+    public static function createDiscount(): Discount
     {
-        return (new Discount)
-            ->setExpiresAt(Carbon::now()->addMinutes($this->defaultExpiry));
+        return new Discount;
     }
 }

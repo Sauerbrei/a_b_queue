@@ -21,6 +21,10 @@ services:
       - database
     volumes:
       - .:/srv/app
+    environment:
+      PHP_IDE_CONFIG: "serverName=docker"
+      PHP_XDEBUG_ENABLED: 1
+      XDEBUG_CONFIG: remote_host=172.17.0.1
 
   nginx:
     build:
@@ -34,5 +38,5 @@ services:
     depends_on:
       - php
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:80"
+      - "8443:443"
