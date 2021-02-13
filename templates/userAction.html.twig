@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="discount_list">
+    {% for discount in discountList %}
+        <div class="discount">
+            <div class="discount_code">
+                <span class="claim_discount" data-id="{{ discount.id }}">
+                    {{ discount.code }}
+                </span>
+            </div>
+            <div id="countdown_{{ discount.id }}" data-countdown="{{ discount.expiresAt|date("m/d/Y") }}"></div>
+            <div class="hidden" id="claimed_{{ discount.id }}">claimed</div>
+            <br/>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

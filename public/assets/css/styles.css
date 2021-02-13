@@ -1,0 +1,42 @@
+
+.head {
+    padding: 2rem;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    background-color: #ececec;
+}
+
+.content {
+    padding: 1rem;
+}
+
+.user_logo IMG {
+    width: 100px;
+}
+
+aside {
+    border-right: 1px solid black;
+    background-color: #ececec;
+    padding: 1rem;
+}
+
+.user_login > .user {
+    display: inline-block;
+}
+
+.user_login .user:not(:last-child) {
+    padding-right: 1rem;
+}
+
+.claim_discount {
+    background-color: yellow;
+    cursor: pointer;
+}
+
+#claim_tokens {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
