@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Discount;
 use App\Entity\User;
+use App\Exception\Model\DiscountAlreadyUsedException;
+use App\Exception\Model\DiscountExpiredException;
 use App\Manager\DiscountManager;
 use App\Service\Facade\DiscountProviderFacade;
+use Doctrine\ORM\EntityNotFoundException;
 use Exception;
 use JMS\Serializer\SerializerBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -71,6 +75,50 @@ class DiscountController extends AbstractController
             [
                 'success' => true,
                 'data' => $content,
+            ]
+        );
+    }
+
+    /**
+     * @Route("/discount/claim/{id}", name="claim_discount")
+     * @param Discount               $discount
+     * @param DiscountProviderFacade $discountProvider
+     *
+     * @return Response
+     */
+    public function claimDiscount(Discount $discount, DiscountProviderFacade $discountProvider): Response
+    {
+        try {
+            $discountProvider->claimDiscount($discount);
+        } catch (EntityNotFoundException $exception) {
+            return $this->json(
+                [
+                    'success' => false,
+                    'error' => $exception->getMessage(),
+                ],
+                Response::HTTP_BAD_REQUEST
+            );
+        } catch (DiscountAlreadyUsedException|DiscountExpiredException $exception) {
+            return $this->json(
+                [
+                    'success' => false,
+                    'error' => $exception->getMessage(),
+                ],
+                Response::HTTP_CONFLICT
+            );
+        } catch (Exception $exception) {
+            return $this->json(
+                [
+                    'success' => false,
+                    'error' => 'inter_server_error',
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+
+        return $this->json(
+            [
+                'success' => true,
             ]
         );
     }

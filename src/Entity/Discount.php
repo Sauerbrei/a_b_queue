@@ -149,4 +149,12 @@ class Discount implements PresenceInterface
 
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isExpired(): bool
+    {
+        return time() > $this->getExpiresAt()->getTimestamp();
+    }
 }

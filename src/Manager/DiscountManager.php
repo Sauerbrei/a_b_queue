@@ -7,6 +7,7 @@ namespace App\Manager;
 use App\Entity\Discount;
 use App\Entity\User;
 use App\Repository\DiscountRepository;
+use App\Service\Factory\Entity\DiscountFactory;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -33,6 +34,21 @@ class DiscountManager extends AbstractManager
     {
         parent::__construct($doctrine);
         $this->discountRepository = $discountRepository;
+    }
+
+    /**
+     * @param int $discountId
+     *
+     * @return Discount
+     */
+    public function getDiscount(int $discountId): Discount
+    {
+        $discount = $this->discountRepository->find($discountId);
+        if ($discount instanceof Discount === false) {
+            return DiscountFactory::createDiscount();
+        }
+
+        return $discount;
     }
 
     /**
