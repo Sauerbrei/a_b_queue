@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use App\Interfaces\Model\PresenceInterface;
 use App\Traits\Model\Persistable;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
@@ -43,6 +44,11 @@ class Discount implements PresenceInterface
      * @ORM\Column(type="boolean", options={"default": "0"})
      */
     private bool $used = false;
+    /**
+     * @var DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private DateTime $expiresAt;
 
     /**
      * @return int
@@ -120,6 +126,26 @@ class Discount implements PresenceInterface
     public function setUsed(bool $used): Discount
     {
         $this->used = $used;
+
+        return $this;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getExpiresAt(): DateTime
+    {
+        return $this->expiresAt;
+    }
+
+    /**
+     * @param DateTime $expiresAt
+     *
+     * @return Discount
+     */
+    public function setExpiresAt(DateTime $expiresAt): Discount
+    {
+        $this->expiresAt = $expiresAt;
 
         return $this;
     }
