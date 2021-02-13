@@ -29,6 +29,8 @@ class Discount implements PresenceInterface
     private int $id;
     /**
      * @var User|null
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private ?User $user;
     /**
@@ -38,9 +40,9 @@ class Discount implements PresenceInterface
     private string $code;
     /**
      * @var bool
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": "0"})
      */
-    private bool $used;
+    private bool $used = false;
 
     /**
      * @return int
