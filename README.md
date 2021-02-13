@@ -2,11 +2,12 @@
 
 ## first start
 
-1. `docker-compose up`
-2. `docker-compose exec php /bin/sh`
-3. `bin/console doctrine:migrations:migrate`
-4. `bin/console abqueue:generate:testdata` OR execute docker/db/init.sql
-5. visit http://localhost:8080
+1. `docker-compose build`
+2. `docker-compose up`
+3. `docker-compose exec php /bin/sh`
+4. `bin/console doctrine:migrations:migrate`
+5. `bin/console abqueue:generate:testdata`
+6. visit http://localhost:8080
 
 
 ## Adjust settings

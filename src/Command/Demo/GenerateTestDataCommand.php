@@ -58,8 +58,8 @@ class GenerateTestDataCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $amountDiscounts = 12; //$input->getOption('amountDiscounts'); //YAGNI
-        $amountUsers = 2; //$input->getOption('amountUsers'); //YAGNI
+        $amountDiscounts = 100; //$input->getOption('amountDiscounts'); //YAGNI
+        $amountUsers = 5; //$input->getOption('amountUsers'); //YAGNI
         for ($i = 0; $i < $amountUsers; $i++) {
             $user = UserFactory::createUser()->setFirstName('Test'.$i)->setLastName('User'.$i);
             $this->userManager->save($user);

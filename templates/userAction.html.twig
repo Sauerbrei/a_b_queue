@@ -9,7 +9,7 @@
                     {{ discount.code }}
                 </span>
             </div>
-            <div id="countdown_{{ discount.id }}" data-countdown="{{ discount.expiresAt|date("m/d/Y") }}"></div>
+            <div id="countdown_{{ discount.id }}" data-countdown="{{ discount.expiresAt|date("m/d/Y H:i:s") }}"></div>
             <div class="hidden" id="claimed_{{ discount.id }}">claimed</div>
             <br/>
         </div>

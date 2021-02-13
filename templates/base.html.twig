@@ -31,7 +31,9 @@
 <main class="row">
     <aside class="col-md-3">
         <div class="links">
+            {% if user is defined %}
             <span class="link_item" id="claim_tokens" data-userid="{{ user.id }}">Claim New Discount Tokens</span>
+            {% endif %}
         </div>
     </aside>
 
