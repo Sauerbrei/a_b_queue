@@ -1,11 +1,23 @@
 version: '3'
 
 services:
+  database:
+    build:
+      context: ./docker/db
+    env_file:
+      - .env
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./var/cache/data:/var/lib/mysql
+
   php:
     build:
       context: ./docker/php
+    depends_on:
+      - database
     env_file:
-      - ./.env
+      - .env
     volumes:
       - .:/srv/app
 
