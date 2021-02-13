@@ -48,7 +48,7 @@ class DiscountProviderFacade
      */
     public function registerDiscounts(int $amount, User $user): Collection
     {
-        $discountList = $this->discountManager->findValidCoupons($amount);
+        $discountList = $this->discountManager->getNewValidDiscounts($amount);
         $expiration = (new DateTime)->add(new DateInterval('PT' . $this->defaultExpiry . 'M'));
         foreach ($discountList as $discount) {
             $discount
