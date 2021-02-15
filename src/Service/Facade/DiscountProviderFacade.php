@@ -84,6 +84,7 @@ class DiscountProviderFacade
         if ($discountEntity->isExpired() === true) {
             throw new DiscountExpiredException('Sorry mate, but this discount seems to be used :(');
         }
+        // ToDo Check if selected discount belongs to the user who requests the claim
         $discount->setUsed(true);
         // fire event
         $this->discountManager->save($discount);
